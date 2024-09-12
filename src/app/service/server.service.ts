@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { CustomResponse } from '../interface/custom-response';
-import { catchError, Observable, tap, throwError } from 'rxjs';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { tap, catchError } from 'rxjs/operators';
+
+import { HttpClient, HttpErrorResponse} from '@angular/common/http';
 import { Server } from '../interface/server';
 import { Status } from '../enum/status.enum';
 
@@ -9,7 +11,7 @@ import { Status } from '../enum/status.enum';
   providedIn: 'root'
 })
 export class ServerService {
-  private readonly apiUrl = 'any';
+  private readonly apiUrl = 'http://localhost:8080';
 
 
   constructor(private http: HttpClient) { }
