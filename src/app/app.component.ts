@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { catchError, map, Observable, of, startWith } from 'rxjs';
 import { AppState } from './interface/app-state';
 import { CustomResponse } from './interface/custom-response';
@@ -10,9 +10,10 @@ import { DataState } from './enum/data-state.enum';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'organizeServer-FE';
   appState$: Observable<AppState<CustomResponse>>;
+
   constructor(private serverService: ServerService) { }
 
   ngOnInit(): void {
@@ -23,7 +24,7 @@ export class AppComponent {
         }),
         startWith({ dataState: DataState.LOADING_STATE }),
         catchError((error: string) => {
-          return of({ dataState: DataState.ERROR_STATE, error })
+          return of({ dataState: DataState.ERROR_STATE, error: error });
         })
       );
   }
